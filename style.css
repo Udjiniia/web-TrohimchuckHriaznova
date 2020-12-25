@@ -1,0 +1,122 @@
+.four {
+    background: #F4F7EE;
+    padding: 50px 20px;
+    text-align: center;
+}
+.four h1 {
+    font-family: 'Merriweather', serif;
+    position: relative;
+    color: #C44737;
+    font-size: 50px;
+    font-weight: normal;
+    padding: 8px 20px 7px 20px;
+    border-top: 4px solid;
+    border-left: 4px solid;
+    display: inline-block;
+    margin: 0;
+    line-height: 1;
+}
+.four h1:before {
+    content: "";
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    top: -28px;
+    left: -28px;
+    border: 4px solid #C44737;
+    box-sizing: border-box;
+}
+@media (max-width: 450px) {
+    .four h1 {font-size: 36px;}
+    .four h1:before {
+        width: 20px;
+        height: 20px;
+        top: -20px;
+        left: -20px;
+    }
+}
+
+
+
+
+p{
+    font-family: Arial;
+}
+h1{
+    font-family: Arial;
+    margin-left: 20px;
+}
+h2{
+    font-family: Arial;
+    margin-left: 20px;
+}
+h3{
+    font-family: Arial;
+}
+body{
+    align-content: center;
+}
+.center {
+    width: 900px; /* Ширина элемента в пикселах */
+    padding: 20px; /* Поля вокруг текста */
+    margin: auto; /* Выравниваем по центру */
+    background: #E9E4E0; /* Цвет фона */
+}
+.nav-style{
+    float: none;
+    position: absolute;
+    top: 10%;
+    left: 3%;
+}
+.li-style {
+    float: left;
+}
+
+.header-style{
+    background-color: burlywood;
+}
+.li-a-style {
+    display: block;
+    padding: 8px;
+    background-color: darkkhaki;
+}
+
+.rounded {
+    counter-reset: li;
+    list-style: none;
+    font: 14px "Trebuchet MS", "Lucida Sans";
+    padding: 0;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+.rounded a {
+    position: relative;
+    display: block;
+    padding: .4em .4em .4em 2em;
+    margin: .5em 0;
+    background: #DAD2CA;
+    color: #444;
+    text-decoration: none;
+    border-radius: .3em;
+    transition: .3s ease-out;
+}
+.rounded a:hover {background: #E9E4E0;}
+.rounded a:hover:before {transform: rotate(360deg);}
+.rounded a:before {
+    content: counter(li);
+    counter-increment: li;
+    position: absolute;
+    left: -1.3em;
+    top: 50%;
+    margin-top: -1.3em;
+    background: #8FD4C1;
+    height: 2em;
+    width: 2em;
+    line-height: 2em;
+    border: .3em solid white;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 2em;
+    transition: all .3s ease-out;
+}
+
+
