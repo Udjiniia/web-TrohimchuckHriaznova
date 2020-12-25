@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<?php
+require_once("db.php");
+require_once('books.php');
+
+$link = db_connect();
+
+$books = books_all($link);
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,7 +20,6 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         $( function() {
-            $( "#datepicker" ).datepicker();
             $( "#dialog" ).dialog();
         } );
     </script>
@@ -26,19 +32,16 @@
     ul#ul1 {
         list-style-image: url("images/bestseller.png");
     }
-    .php_answer{
-        background-color: #eeeeee;
-        text-align: right;
-    }
-    .tweet{
-        background-color: #eeeeee;
-        margin: 0;
-        padding: 0;
-        display: flex;
-    }
     div p{
         padding-left: 10px;
         font-size: 15px;
+    }
+    .php_answer{
+        background-color: #eeeeee;
+        text-align: center;
+        font-family: "Open Sans", sans-serif;
+        font-size: 15px;
+        padding-top: 10px;
     }
 </style>
 <body>
@@ -56,7 +59,7 @@
                     <li><a href="">Головна</a></li>
                     <li><a href="JavaScript:window.alert('На жаль, цей розділ не працює')">Про нас</a>
                     <li><a href="">Автори</a></li>
-                    <li><a href="5.3.php">Література</a></li>
+                    <li><a href="literature.php">Література</a></li>
                 </ul>
             </nav>
             <form class="search">
@@ -68,8 +71,12 @@
     <div class="php_answer">
         <?php
         if (( $search = $_GET['search'])) {
-            $search = $_GET['search'];
-            echo('За вашим запитом "'.$search.'" нічого не занйдено');
+            $book = books_get($link, $search);
+            if ($book == null) {
+                echo("Такої книги не існує(");
+            } else {
+                echo($book["name_"]);
+            }
         }
         ?>
     </div>
@@ -86,7 +93,6 @@
                 <li>Психологія</li>
                 <li>Романи</li>
             </ul>
-            <p>Дата: <input type="text" id="datepicker"></p>
         </div>
         <div class="best-today">
             <ul id="ul1">
@@ -98,25 +104,8 @@
             </ul>
         </div>
     </div>
-    <div class="tweet">
-        <blockquote class="twitter-tweet"><p lang="und" dir="ltr"><a href="https://t.co/dtZt2Tju9T">pic.twitter.com/dtZt2Tju9T</a></p>&mdash; ᴛᴡɪʟɪɢʜᴛ ʀᴇɴᴀɪssᴀɴᴄᴇ (@twilightreborn) <a href="https://twitter.com/twilightreborn/status/1317080352494673925?ref_src=twsrc%5Etfw">October 16, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        <blockquote class="twitter-tweet"><p lang="ru" dir="ltr">у кого какая любимая лгбт драма?</p>&mdash; Юрий Каплан (@yurakaplan) <a href="https://twitter.com/yurakaplan/status/1276430754843693056?ref_src=twsrc%5Etfw">June 26, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    </div>
 
     <div class="bottom">
-        <h5>Повідомити про нове надходження книг на електронну пошту:  </h5>
-        <form action="index.php"  method="POST">
-            <input type="text" name="email" type="email" required placeholder="Введіть ваш email  ">
-            <button><a type="submit"> Підписатися </a><br></button>
-        </form>
-        <br>
-        <?php
-        if (( $email = $_POST['email'])) {
-            $email = $_POST['email'];
-            echo("Повідомлення про надходження нових книг буде відправлено на : ".$email);
-        }
-        ?>
-        <br>
 
         <p class="bottom-text">“The library is inhabited by spirits that come out of the pages at night.”
             – <strong>Isabel Allende</strong></p>
@@ -129,6 +118,16 @@
         </ul>
 
     </div>
+    <?php
+    foreach($books as $b):
+        ?>
+        <tr>
+            <td><?=$b["id"]?></td>
+            <td><?=$b["name_"]?></td>
+            <td><?=$b["genre"]?></td>
+
+        </tr>
+    <?php endforeach;?>
 
     <footer>
         <div align="center" class="footer">
