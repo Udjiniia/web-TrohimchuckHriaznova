@@ -87,14 +87,14 @@ if(isset($_SESSION['lang'])){
             <nav>
                 <ul>
                     <li><a href=""> <?= _MAIN?></a></li>
-                    <li><a href=""><?= _AUTHORS?></a></li>
+                    <li><a href="mail.php"><?= _AUTHORS?></a></li>
                     <li><a href="literature.php"><?= _LITERATURE?></a></li>
                     <li>
                         <form method='get' action='' id='form_lang' >
                             <select name='lang' onchange='changeLang();' >
-                                <option value='eng' <?php if(isset($_SESSION['lang']) && $_SESSION['lang'] == 'eng') ?> ><?= english ?></option>
-                                <option value='ukr' <?php if(isset($_SESSION['lang']) && $_SESSION['lang'] == 'ukr') ?> ><?= українська ?></option>
-                                <option value='rus' <?php if(isset($_SESSION['lang']) && $_SESSION['lang'] == 'rus') ?> ><?= русский ?></option>
+                                <option value='eng' <?php if(isset($_SESSION['lang']) && $_SESSION['lang'] == 'eng'){ echo "selected"; } ?> ><?= english ?></option>
+                                <option value='ukr' <?php if(isset($_SESSION['lang']) && $_SESSION['lang'] == 'ukr'){ echo "selected"; } ?> ><?= українська ?></option>
+                                <option value='rus' <?php if(isset($_SESSION['lang']) && $_SESSION['lang'] == 'rus'){ echo "selected"; } ?> ><?= русский ?></option>
                             </select>
                         </form>
                     </li>
@@ -176,7 +176,7 @@ if(isset($_SESSION['lang'])){
             – <strong>Isabel Allende</strong></p>
         <br>
 
-
+        <a href="mail.php">Перейти до листів</a>
     </div>
 
     <footer>
